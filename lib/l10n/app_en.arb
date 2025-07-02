@@ -1,0 +1,10 @@
+{
+  "@@locale": "en",
+  "appTitle": "People Register",
+  "nameLabel": "Name",
+  "ageLabel": "Age",
+  "addButton": "Add",
+  "peopleListTitle": "List of People",
+  "invalidAge": "Please enter a valid age",
+  "emptyName": "Name cannot be empty"
+}

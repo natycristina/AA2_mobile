@@ -1,0 +1,10 @@
+{
+  "@@locale": "pt",
+  "appTitle": "Cadastro de Pessoas",
+  "nameLabel": "Nome",
+  "ageLabel": "Idade",
+  "addButton": "Adicionar",
+  "peopleListTitle": "Lista de Pessoas",
+  "invalidAge": "Por favor, insira uma idade válida",
+  "emptyName": "O nome não pode estar vazio"
+}
