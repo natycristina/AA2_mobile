@@ -1,10 +1,10 @@
 {
   "@@locale": "pt",
-  "appTitle": "Cadastro de Pessoas",
-  "nameLabel": "Nome",
-  "ageLabel": "Idade",
-  "addButton": "Adicionar",
-  "peopleListTitle": "Lista de Pessoas",
-  "invalidAge": "Por favor, insira uma idade válida",
-  "emptyName": "O nome não pode estar vazio"
+  "login": "Entrar",
+  "email": "Email",
+  "password": "Senha",
+  "invalid_credentials": "Credenciais inválidas",
+  "dont_have_account": "Não tem uma conta? Cadastre-se",
+  "login_title": "JobTree",
+  "login_subtitle": "Sua plataforma para oportunidades!"
 }

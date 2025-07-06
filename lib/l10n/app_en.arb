@@ -1,10 +1,10 @@
 {
   "@@locale": "en",
-  "appTitle": "People Register",
-  "nameLabel": "Name",
-  "ageLabel": "Age",
-  "addButton": "Add",
-  "peopleListTitle": "List of People",
-  "invalidAge": "Please enter a valid age",
-  "emptyName": "Name cannot be empty"
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "invalid_credentials": "Invalid credentials",
+  "dont_have_account": "Don't have an account? Register",
+  "login_title": "JobTree",
+  "login_subtitle": "Your platform for opportunities!"
 }
