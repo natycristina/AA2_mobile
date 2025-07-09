@@ -12,7 +12,13 @@
   "find_next_opportunity": "Encontre sua próxima oportunidade!",
   "search_positions": "Pesquisar vagas...",
   "no_jobs_found": "Nenhuma vaga encontrada para sua busca.",
-  "fillAllTheFields": "Por favor, fill in all fields.",
+  "fillAllTheFields": "Por favor, preencha todos os campos.",
   "login_success_message": "Login successful!",
-  "no_jobs_found": "No jobs found."
+  "no_jobs_found": "Nenhuma vaga encontrada.",
+  "register_create_account": "Crie sua conta",
+  "fill_fields_to_continue": "Preencha os campos para continuar",
+  "name": "Nome",
+  "confirm_password": "Confirme a senha",
+  "register": "Registrar",
+  "ja_tem_conta": "Já tem uma conta? Faça login"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/l10n/app_localizations.dart';
 import 'package:flutter_projects/viewmodels/register_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<RegisterViewModel>();
+    final texts = AppLocalizations.of(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (viewModel.registrationSuccess) {
@@ -74,8 +76,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Preencha os dados para continuar',
+                Text(
+                  texts!.fill_fields_to_continue,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey),
                 ),
@@ -95,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 16),
                         _buildTextField(
-                          label: 'Email',
+                          label: texts!.email,
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           error: viewModel.errorMessage != null && _emailController.text.isEmpty,
@@ -103,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 16),
                         _buildTextField(
-                          label: 'Senha',
+                          label: texts!.password,
                           controller: _passwordController,
                           obscureText: !_passwordVisible,
                           toggleVisibility: () => setState(() => _passwordVisible = !_passwordVisible),
@@ -112,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 16),
                         _buildTextField(
-                          label: 'Confirmar Senha',
+                          label: texts!.confirm_password,
                           controller: _confirmPasswordController,
                           obscureText: !_confirmPasswordVisible,
                           toggleVisibility: () => setState(() => _confirmPasswordVisible = !_confirmPasswordVisible),
@@ -145,8 +147,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   child: viewModel.isLoading
                       ? const CircularProgressIndicator(color: Colors.black87)
-                      : const Text(
-                    'Registrar',
+                      : Text(
+                    texts.register,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
@@ -157,8 +159,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: widget.onNavigateToLogin,
-                  child: const Text(
-                    'Já tem conta? Faça login',
+                  child: Text(
+                    texts.ja_tem_conta,
                     style: TextStyle(color: Colors.blueAccent),
                   ),
                 ),
@@ -186,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
-        errorText: error ? 'Campo obrigatório' : null,
+        errorText: error ? "Campo obrigatório" : null,
         suffixIcon: toggleVisibility != null
             ? IconButton(
           icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),

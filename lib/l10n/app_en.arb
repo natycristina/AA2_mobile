@@ -13,5 +13,11 @@
 
   "fillAllTheFields": "Please fill in all fields.",
   "login_success_message": "Login successful!",
-  "no_jobs_found": "No jobs found."
+  "no_jobs_found": "No jobs found.",
+  "register_create_account": "Create your account",
+  "fill_fields_to_continue": "Fill in all the fields to continue",
+  "name": "Name",
+  "confirm_password": "Confirm password",
+  "register": "Register",
+  "ja_tem_conta": "Already have an account? Log in"
 }

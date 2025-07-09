@@ -39,11 +39,29 @@ class AppLocalizationsPt extends AppLocalizations {
   String get profile_title => 'Perfil do Usuário';
 
   @override
-  String get fillAllTheFields => 'Por favor, fill in all fields.';
+  String get fillAllTheFields => 'Por favor, preencha todos os campos.';
 
   @override
   String get login_success_message => 'Login successful!';
 
   @override
-  String get no_jobs_found => 'No jobs found.';
+  String get no_jobs_found => 'Nenhuma vaga encontrada.';
+
+  @override
+  String get register_create_account => 'Crie sua conta';
+
+  @override
+  String get fill_fields_to_continue => 'Preencha os campos para continuar';
+
+  @override
+  String get name => 'Nome';
+
+  @override
+  String get confirm_password => 'Confirme a senha';
+
+  @override
+  String get register => 'Registrar';
+
+  @override
+  String get ja_tem_conta => 'Já tem uma conta? Faça login';
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/l10n/app_localizations_pt.dart';
 import 'package:flutter_projects/repositories/user_repository.dart';
 
 class RegisterViewModel extends ChangeNotifier {
@@ -55,7 +56,7 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
 
     if (_nome.isEmpty || _email.isEmpty || _password.isEmpty || _confirmPassword.isEmpty) {
-      _errorMessage = "Preencha todos os campos.";
+      _errorMessage = "Preencha todos os campos";
       _isLoading = false;
       notifyListeners();
       return;
