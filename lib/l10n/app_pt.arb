@@ -6,5 +6,13 @@
   "invalid_credentials": "Credenciais inválidas",
   "dont_have_account": "Não tem uma conta? Cadastre-se",
   "login_title": "JobTree",
-  "login_subtitle": "Sua plataforma para oportunidades!"
+  "login_subtitle": "Sua plataforma para oportunidades!",
+  "job_tree": "JobTree",
+  "profile_title": "Perfil do Usuário",
+  "find_next_opportunity": "Encontre sua próxima oportunidade!",
+  "search_positions": "Pesquisar vagas...",
+  "no_jobs_found": "Nenhuma vaga encontrada para sua busca.",
+  "fillAllTheFields": "Por favor, fill in all fields.",
+  "login_success_message": "Login successful!",
+  "no_jobs_found": "No jobs found."
 }

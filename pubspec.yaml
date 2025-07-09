@@ -1,44 +1,48 @@
-name: pc_10_mobile
+name: flutter_projects
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: 'none' # Prevents accidental publishing
+
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.1
+  sdk: '>=3.0.0 <4.0.0' # Mantido o seu SDK para >=3.0.0 <4.0.0
 
 dependencies:
   flutter:
     sdk: flutter
-
-  # Ícones estilo iOS
   cupertino_icons: ^1.0.8
-
-  # Floor: ORM para SQLite
-  floor: ^1.4.2
-  sqflite: ^2.3.3+1
-  path: ^1.8.3
-  path_provider: ^2.1.2
-
-  # Gerenciador de estado
-  provider: ^6.1.2
-
-  # Internacionalização
+  # Para internacionalização (R5)
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2
+  intl: ^0.20.2 # ATUALIZADO para a versão exigida por flutter_localizations
+  provider: ^6.0.5
+  sqflite: ^2.3.0
+  path_provider: ^2.1.1
+  http: ^1.2.1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^5.0.0
-
-  # Geração do código Floor
-  floor_generator: ^1.4.2
-  build_runner: ^2.4.8
+  flutter_lints: ^2.0.0 # Versão estável. Pode ser ajustada se quiser usar a mais recente, mas esta deve funcionar.
+  flutter_launcher_icons: ^0.13.1 # Versão estável. Pode ser ajustada se quiser usar a mais recente.
+  # Para geração de código de internacionalização e assets (R5)
+  flutter_gen: ^5.3.0 # Versão atualizada e estável
+  flutter_gen_runner: ^5.10.0 # <--- CORRIGIDO AQUI! Esta é a versão que o Flutter está pedindo.
 
 flutter:
+  generate: true # ESSA LINHA É CRUCIAL PARA A GERAÇÃO DE LOCALIZAÇÕES
   uses-material-design: true
 
-  # Necessário para gerar arquivos de tradução
-  generate: true
+  # Caso você tenha assets (imagens, etc.) em seu projeto, descomente e ajuste:
+  # assets:
+  #   - assets/images/
+  #   - assets/icons/
+
+  # Caso você tenha fontes personalizadas em seu projeto, descomente e ajuste:
+  # fonts:
+  #   - family: MyCustomFont
+  #     fonts:
+  #       - asset: assets/fonts/MyCustomFont-Regular.ttf
+  #       - asset: assets/fonts/MyCustomFont-Bold.ttf
+  #         weight: 700
