@@ -45,6 +45,7 @@ class LoginViewModel extends ChangeNotifier {
     }
 
     try {
+      print("${_email}, ${_password}");
       final user = await _userRepository.login(_email, _password);
       if (user != null) {
         _loginSuccess = true;

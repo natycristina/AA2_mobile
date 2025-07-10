@@ -18,7 +18,6 @@ class UserRepository {
     // Tenta primeiro o login via backend (R3)
     try {
       final User? backendUser = await _userApiService.loginUser(email, password);
-
       if (backendUser != null) {
         // Se o backend validou, garantimos que o usuário existe localmente (R4)
         final String passwordToStoreLocally = password; // Ou o hash se você estiver usando BCrypt
@@ -26,13 +25,11 @@ class UserRepository {
         User? localUser = await _appDatabase.getUserByEmail(email);
 
         if (localUser != null) {
-          localUser.idUser = backendUser.idUser;
           localUser.nome = backendUser.nome;
           localUser.senha = passwordToStoreLocally;
           await _appDatabase.insertUser(localUser);
         } else {
           final newUser = User(
-            idUser: backendUser.idUser,
             nome: backendUser.nome,
             email: backendUser.email,
             senha: passwordToStoreLocally,
@@ -41,9 +38,10 @@ class UserRepository {
           localUser = newUser;
         }
 
-        if (localUser != null && localUser.idUser != null) {
+        if (localUser != null && localUser.email != null) {
           final prefs = await SharedPreferences.getInstance();
-          await prefs.setInt('logged_user_id', localUser.idUser!);
+          await prefs.setString('logged_user_email', localUser.email
+          );
         }
         return localUser;
       }
@@ -56,9 +54,9 @@ class UserRepository {
     if (localUser != null) {
       if (localUser.senha == password) { // Por enquanto, comparação direta para teste
         print('Login local bem-sucedido via SQLite.');
-        if (localUser.idUser != null) {
+        if (localUser.email != null) {
           final prefs = await SharedPreferences.getInstance();
-          await prefs.setInt('logged_user_id', localUser.idUser!);
+          await prefs.setString('logged_user_email', localUser.email);
         }
         return localUser;
       }
@@ -75,7 +73,6 @@ class UserRepository {
         final hashedPassword = password;
 
         final newUser = User(
-          idUser: backendUser.idUser,
           nome: nome,
           email: email,
           senha: hashedPassword,

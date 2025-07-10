@@ -6,19 +6,22 @@ class UserApiService {
   // Use 10.0.2.2 para emulador Android
   // Se for dispositivo físico, use o IP real da sua máquina (ex: 192.168.1.100)
   // Certifique-se de que seu backend Node.js está rodando em http://localhost:3001
-  static const String _baseUrl = 'http://10.0.2.2:3001';
+  static const String _baseUrl = 'http://0.0.0.0:3001';
 
   Future<User?> registerUser(String name, String email, String password) async {
     try {
       final response = await http.post(
         Uri.parse('$_baseUrl/register'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'name': name, 'email': email, 'password': password}),
+        body: jsonEncode({'nome': name, 'email': email, 'senha': password}),
       );
 
       if (response.statusCode == 200) {
+        print("BRUH");
         // Supondo que o backend retorna os dados do usuário registrado
         final Map<String, dynamic> responseBody = jsonDecode(response.body);
+        print(responseBody);
+        print("BRUH2");
         // Ajuste a criação do User.fromJson conforme o que seu backend retorna.
         // Se seu backend retorna um objeto User com ID, email, senha, etc.
         return User.fromJson(responseBody);
@@ -37,7 +40,7 @@ class UserApiService {
       final response = await http.post(
         Uri.parse('$_baseUrl/login'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email, 'password': password}),
+        body: jsonEncode({'email': email, 'senha': password}),
       );
 
       if (response.statusCode == 200) {

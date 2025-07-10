@@ -175,6 +175,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No jobs found.'**
   String get no_jobs_found;
+
+  /// No description provided for @register_create_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get register_create_account;
+
+  /// No description provided for @fill_fields_to_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Fill in all the fields to continue'**
+  String get fill_fields_to_continue;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get confirm_password;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @ja_tem_conta.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Log in'**
+  String get ja_tem_conta;
 }
 
 class _AppLocalizationsDelegate

@@ -26,7 +26,7 @@ class AppDatabase {
 
     return await openDatabase(
       path,
-      version: 1, // Incrementar a versão quando houver mudanças no schema
+      version: 4, // Incrementar a versão quando houver mudanças no schema
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -36,29 +36,28 @@ class AppDatabase {
     // Tabela de Usuários
     await db.execute('''
       CREATE TABLE users (
-        idUser INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT UNIQUE,
-        password TEXT
+        email TEXT UNIQUE PRIMARY KEY,
+        nome TEXT,
+        senha TEXT
       )
     ''');
     // Tabela de Vagas (exemplo)
     await db.execute('''
       CREATE TABLE jobs (
         idJob INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        description TEXT,
-        company TEXT,
-        salary TEXT
+        titulo TEXT,
+        descricao TEXT,
+        empresa TEXT,
+        salario TEXT
       )
     ''');
     // Tabela de relação Usuário-Vaga (JobUser) se necessário
     await db.execute('''
       CREATE TABLE user_jobs (
-        userId INTEGER,
+        user_email TEXT,
         jobId INTEGER,
-        PRIMARY KEY (userId, jobId),
-        FOREIGN KEY (userId) REFERENCES users(idUser) ON DELETE CASCADE,
+        PRIMARY KEY (user_email, jobId),
+        FOREIGN KEY (user_email) REFERENCES users(email) ON DELETE CASCADE,
         FOREIGN KEY (jobId) REFERENCES jobs(idJob) ON DELETE CASCADE
       )
     ''');
@@ -69,24 +68,24 @@ class AppDatabase {
     // final hashedPassword = BCrypt.hashpw('password', BCrypt.gensalt()); // Se estiver usando bcrypt
     final String testPasswordHash = 'password'; // Use um hash real se bcrypt estiver habilitado
     await db.insert('users', {
-      'name': 'Usuário Teste',
+      'nome': 'Usuário Teste',
       'email': 'test@example.com',
-      'password': testPasswordHash,
+      'senha': testPasswordHash,
     });
     print('Usuário de teste inserido no SQLite.');
 
     // Inserir algumas vagas iniciais
     await db.insert('jobs', {
-      'title': 'Desenvolvedor Flutter',
-      'description': 'Vaga para desenvolvedor Flutter júnior.',
-      'company': 'Tech Solutions',
-      'salary': 'R\$ 3000',
+      'titulo': 'Desenvolvedor Flutter',
+      'descricao': 'Vaga para desenvolvedor Flutter júnior.',
+      'empresa': 'Tech Solutions',
+      'salario': 'R\$ 3000',
     });
     await db.insert('jobs', {
-      'title': 'Designer UI/UX',
-      'description': 'Experiência com Figma e prototipagem.',
-      'company': 'Creative Minds',
-      'salary': 'R\$ 4500',
+      'titulo': 'Designer UI/UX',
+      'descricao': 'Experiência com Figma e prototipagem.',
+      'empresa': 'Creative Minds',
+      'salario': 'R\$ 4500',
     });
     print('Vagas de teste inseridas no SQLite.');
   }
@@ -94,9 +93,10 @@ class AppDatabase {
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     // Lógica para migração de banco de dados se a versão mudar
     // Por exemplo, se newVersion > oldVersion, adicione colunas ou tabelas
-    if (oldVersion < 2) {
+    if (oldVersion < 4) {
       // Exemplo: Adicionar uma nova coluna na versão 2
-      // await db.execute('ALTER TABLE users ADD COLUMN phone TEXT;');
+      // await db.execute('ALTER TABLE users ADD COLUMN nome TEXT PRIMARY KEY');
+      // await db.execute('ALTER TABLE users DROP COLUMN');
     }
   }
 

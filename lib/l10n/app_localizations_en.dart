@@ -46,4 +46,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_jobs_found => 'No jobs found.';
+
+  @override
+  String get register_create_account => 'Create your account';
+
+  @override
+  String get fill_fields_to_continue => 'Fill in all the fields to continue';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get confirm_password => 'Confirm password';
+
+  @override
+  String get register => 'Register';
+
+  @override
+  String get ja_tem_conta => 'Already have an account? Log in';
 }
