@@ -99,14 +99,7 @@ class JobListingScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: JobCard(
                         job: job,
-                        onTap: () {
-                          print('Job clicked: ${job.idJob}');
-                          // TODO: Implementar navegação para o detalhe da vaga
-                          // Exemplo: Navigator.pushNamed(context, '/jobDetail', arguments: job.idJob);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Detalhes da vaga: ${job.titulo}')),
-                          );
-                        },
+                        onTap: () { ClickOnJob(context, job); },
                       ),
                     );
                   },
@@ -169,4 +162,12 @@ class JobCard extends StatelessWidget {
       ),
     );
   }
+}
+
+void ClickOnJob(BuildContext context, Job selectedJob) {
+  Navigator.pushReplacementNamed(context, '/jobApplication', arguments: {'selectedJob': selectedJob});
+}
+
+void OnBack(BuildContext context) {
+  Navigator.pushReplacementNamed(context, '/home');
 }

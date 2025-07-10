@@ -91,11 +91,11 @@ class UserRepository {
   }
 
   // Adicione um método para aplicar a uma vaga
-  Future<bool> applyToJob(int userId, int jobId) async {
+  Future<bool> applyToJob(String userEmail, int jobId) async {
     try {
       // A linha "final jobUser = JobUser(...);" FOI REMOVIDA
       // pois o seu AppDatabase.applyToJob espera userId e jobId diretamente.
-      final id = await _appDatabase.applyToJob(userId, jobId); // <--- CORRIGIDO AQUI!
+      final id = await _appDatabase.applyToJob(userEmail, jobId); // <--- CORRIGIDO AQUI!
       return id > 0;
     } catch (e) {
       print('Erro ao aplicar à vaga: $e');
