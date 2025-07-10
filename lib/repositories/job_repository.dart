@@ -9,6 +9,7 @@ class JobRepository {
   Future<List<Job>> getJobs() async {
     // Você pode decidir se busca da API (futuramente) ou do local
     // Por enquanto, vamos buscar do local
+    print("BRUH2");
     return await _appDatabase.getJobs();
   }
 

@@ -24,7 +24,9 @@ class JobListingViewModel extends ChangeNotifier {
     try {
       // Aqui você chamaria a API real se tivesse uma rota para listar vagas
       // Por enquanto, usamos a simulação do repositório
+      print("BRUH1");
       _allJobs = await _jobRepository.getJobs();
+      print(_allJobs);
       _applyFilter();
     } catch (e) {
       print('Erro ao carregar vagas: $e');

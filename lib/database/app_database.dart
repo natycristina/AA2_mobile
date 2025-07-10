@@ -45,10 +45,10 @@ class AppDatabase {
     await db.execute('''
       CREATE TABLE jobs (
         idJob INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        description TEXT,
-        company TEXT,
-        salary TEXT
+        titulo TEXT,
+        descricao TEXT,
+        empresa TEXT,
+        salario TEXT
       )
     ''');
     // Tabela de relação Usuário-Vaga (JobUser) se necessário
@@ -76,16 +76,16 @@ class AppDatabase {
 
     // Inserir algumas vagas iniciais
     await db.insert('jobs', {
-      'title': 'Desenvolvedor Flutter',
-      'description': 'Vaga para desenvolvedor Flutter júnior.',
-      'company': 'Tech Solutions',
-      'salary': 'R\$ 3000',
+      'titulo': 'Desenvolvedor Flutter',
+      'descricao': 'Vaga para desenvolvedor Flutter júnior.',
+      'empresa': 'Tech Solutions',
+      'salario': 'R\$ 3000',
     });
     await db.insert('jobs', {
-      'title': 'Designer UI/UX',
-      'description': 'Experiência com Figma e prototipagem.',
-      'company': 'Creative Minds',
-      'salary': 'R\$ 4500',
+      'titulo': 'Designer UI/UX',
+      'descricao': 'Experiência com Figma e prototipagem.',
+      'empresa': 'Creative Minds',
+      'salario': 'R\$ 4500',
     });
     print('Vagas de teste inseridas no SQLite.');
   }

@@ -89,7 +89,7 @@ class JobListingScreen extends StatelessWidget {
                 child: viewModel.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : viewModel.filteredJobs.isEmpty
-                    ? Center(child: Text(texts.no_jobs_found)) // Adicione ao ARB
+                    ? Center(child: Text(texts.no_jobs_found))
                     : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   itemCount: viewModel.filteredJobs.length,
@@ -158,6 +158,11 @@ class JobCard extends StatelessWidget {
                 job.descricao,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
+              const SizedBox(height: 8),
+              Text(
+                job.salario,
+                style: Theme.of(context).textTheme.bodyMedium
+              )
             ],
           ),
         ),
