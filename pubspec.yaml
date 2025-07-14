@@ -32,8 +32,14 @@ dev_dependencies:
   flutter_gen_runner: ^5.10.0 # <--- CORRIGIDO AQUI! Esta é a versão que o Flutter está pedindo.
 
 flutter:
-  generate: true # ESSA LINHA É CRUCIAL PARA A GERAÇÃO DE LOCALIZAÇÕES
   uses-material-design: true
+  generate: true # ESSA LINHA É CRUCIAL PARA A GERAÇÃO DE LOCALIZAÇÕES
+
+l10n:
+  arb-dir: lib/l10n
+  template-arb-file: app_en.arb
+  output-localization-file: app_localizations.dart
+  output-class: AppLocalizations
 
   # Caso você tenha assets (imagens, etc.) em seu projeto, descomente e ajuste:
   # assets:

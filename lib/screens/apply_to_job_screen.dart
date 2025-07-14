@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/database/app_database.dart';
+import 'package:flutter_projects/l10n/app_localizations.dart';
 import 'package:flutter_projects/models/job.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +22,7 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final texts = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Enviar Candidatura"),
@@ -64,11 +66,11 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(Icons.cloud_upload, size: 32, color: Color(0xFF00BFA6)),
                     SizedBox(height: 8),
                     Text(
-                      "Enviar currículo",
+                      texts.uploadCV,
                       style: TextStyle(
                         color: Color(0xFF00BFA6),
                         fontSize: 16,
@@ -83,8 +85,8 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
             TextField(
               controller: _messageController,
               maxLines: 5,
-              decoration: const InputDecoration(
-                labelText: "Carta de apresentação",
+              decoration: InputDecoration(
+                labelText: texts.coverLetter,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -102,12 +104,12 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
                   if (userEmail != null && jobId != null) {
                     await AppDatabase().insertUserJob(userEmail, jobId);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Candidatura enviada com sucesso'),)
+                      SnackBar(content: Text(texts.successfulSubmission),)
                     );
                     Navigator.pushReplacementNamed(context, "/home");
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Erro ao enviar candidatura"))
+                        SnackBar(content: Text(texts.errorSubmittingApplication))
                     );
                   }
                 },
@@ -118,8 +120,8 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
-                  "Enviar Candidatura",
+                child: Text(
+                  texts.applyNow,
                   style: TextStyle(color: Color(0xFF1A1A1A)),
                 ),
               ),

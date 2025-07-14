@@ -9,10 +9,10 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get login_title => 'Welcome';
+  String get loginTitle => 'Welcome';
 
   @override
-  String get login_subtitle => 'Sign in to continue';
+  String get loginSubtitle => 'Sign in to continue';
 
   @override
   String get email => 'Email';
@@ -24,44 +24,68 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
-  String get dont_have_account => 'Don\'t have an account? Register here';
+  String get invalidCredentials => 'Invalid Credentials';
 
   @override
-  String get job_tree => 'JobTree';
+  String get dontHaveAccount => 'Don\'t have an account? Register here';
 
   @override
-  String get find_next_opportunity => 'Find your next opportunity';
+  String get jobTree => 'JobTree';
 
   @override
-  String get search_positions => 'Search positions...';
+  String get findNextOpportunity => 'Find your next opportunity';
 
   @override
-  String get profile_title => 'User Profile';
+  String get searchPositions => 'Search positions...';
+
+  @override
+  String get profileTitle => 'User Profile';
 
   @override
   String get fillAllTheFields => 'Please fill in all fields.';
 
   @override
-  String get login_success_message => 'Login successful!';
+  String get loginSuccessMessage => 'Login successful!';
 
   @override
-  String get no_jobs_found => 'No jobs found.';
+  String get noJobsFound => 'No jobs found.';
 
   @override
-  String get register_create_account => 'Create your account';
+  String get registerCreateAccount => 'Create your account';
 
   @override
-  String get fill_fields_to_continue => 'Fill in all the fields to continue';
+  String get fillFieldsToContinue => 'Fill in all the fields to continue';
 
   @override
   String get name => 'Name';
 
   @override
-  String get confirm_password => 'Confirm password';
+  String get confirmPassword => 'Confirm password';
 
   @override
   String get register => 'Register';
 
   @override
-  String get ja_tem_conta => 'Already have an account? Log in';
+  String get jaTemConta => 'Already have an account? Log in';
+
+  @override
+  String get errorSubmittingApplication => 'Error submitting application';
+
+  @override
+  String get successfulSubmission => 'Application successfully submitted';
+
+  @override
+  String get applyNow => 'Apply Now';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get uploadCV => 'Upload CV';
+
+  @override
+  String get coverLetter => 'Cover Letter';
+
+  @override
+  String get submitCandidature => 'Submit Candidature';
 }
