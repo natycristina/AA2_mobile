@@ -24,26 +24,17 @@ class UserRepository {
 
         User? localUser = await _appDatabase.getUserByEmail(email);
 
-        if (localUser != null) {
-          localUser.nome = backendUser.nome;
-          localUser.senha = passwordToStoreLocally;
-          await _appDatabase.insertUser(localUser);
+        if (localUser == null) {
+          return null;
         } else {
-          final newUser = User(
-            nome: backendUser.nome,
-            email: backendUser.email,
-            senha: passwordToStoreLocally,
-          );
-          await _appDatabase.insertUser(newUser);
-          localUser = newUser;
-        }
+          if (localUser.senha == password) {
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString('logged_user_email', localUser.email);
 
-        if (localUser != null && localUser.email != null) {
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('logged_user_email', localUser.email
-          );
+            return localUser;
+          }
+          return null;
         }
-        return localUser;
       }
     } catch (e) {
       print('Erro de conexão com o backend. Tentando login local: $e');

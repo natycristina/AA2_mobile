@@ -186,5 +186,16 @@ class AppDatabase {
       return Job.fromMap(maps[i]);
     });
   }
-// --- FIM DOS NOVOS MÉTODOS ---
+
+  Future<void> insertUserJob(String email, int jobId) async {
+    final db = await database;
+    await db.insert(
+      'user_jobs',
+      {
+        'user_email': email,
+        'jobId': jobId,
+      },
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
+  }
 }

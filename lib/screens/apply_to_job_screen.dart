@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/database/app_database.dart';
 import 'package:flutter_projects/models/job.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApplyToJobScreen extends StatefulWidget {
   final Job? selectedJob;
@@ -92,13 +94,25 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  debugPrint("Clicked on apply");
-                  // widget.applyToJob(widget.jobId);
-                  // widget.navigateToHomepage();
+                onPressed: () async {
+                  final prefs     = await SharedPreferences.getInstance();
+                  final userEmail = prefs.getString('logged_user_email');
+                  final jobId     = widget.selectedJob!.idJob;
+
+                  if (userEmail != null && jobId != null) {
+                    await AppDatabase().insertUserJob(userEmail, jobId);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Candidatura enviada com sucesso'),)
+                    );
+                    Navigator.pushReplacementNamed(context, "/home");
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Erro ao enviar candidatura"))
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFFD600), // VoeYellow
+                  backgroundColor: const Color(0xFFFFD600),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -106,7 +120,7 @@ class _ApplyToJobScreenState extends State<ApplyToJobScreen> {
                 ),
                 child: const Text(
                   "Enviar Candidatura",
-                  style: TextStyle(color: Color(0xFF1A1A1A)), // VoeTextBlack
+                  style: TextStyle(color: Color(0xFF1A1A1A)),
                 ),
               ),
             ),
