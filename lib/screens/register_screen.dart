@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  texts!.fill_fields_to_continue,
+                  texts!.fillFieldsToContinue,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey),
                 ),
@@ -114,7 +114,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(height: 16),
                         _buildTextField(
-                          label: texts!.confirm_password,
+                          label: texts!.confirmPassword,
                           controller: _confirmPasswordController,
                           obscureText: !_confirmPasswordVisible,
                           toggleVisibility: () => setState(() => _confirmPasswordVisible = !_confirmPasswordVisible),
@@ -160,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextButton(
                   onPressed: widget.onNavigateToLogin,
                   child: Text(
-                    texts.ja_tem_conta,
+                    texts.jaTemConta,
                     style: TextStyle(color: Colors.blueAccent),
                   ),
                 ),

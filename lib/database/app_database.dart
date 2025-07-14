@@ -149,9 +149,9 @@ class AppDatabase {
   }
 
   // Métodos para JobUser (se necessário)
-  Future<int> applyToJob(int userId, int jobId) async {
+  Future<int> applyToJob(String userEmail, int jobId) async {
     final db = await database;
-    return await db.insert('user_jobs', {'userId': userId, 'jobId': jobId});
+    return await db.insert('user_jobs', {'userEmail': userEmail, 'jobId': jobId});
   }
 
   // --- NOVOS MÉTODOS ADICIONADOS PARA RESOLVER ERROS ---
@@ -186,5 +186,16 @@ class AppDatabase {
       return Job.fromMap(maps[i]);
     });
   }
-// --- FIM DOS NOVOS MÉTODOS ---
+
+  Future<void> insertUserJob(String email, int jobId) async {
+    final db = await database;
+    await db.insert(
+      'user_jobs',
+      {
+        'user_email': email,
+        'jobId': jobId,
+      },
+      conflictAlgorithm: ConflictAlgorithm.ignore,
+    );
+  }
 }

@@ -9,10 +9,10 @@ class AppLocalizationsPt extends AppLocalizations {
   AppLocalizationsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get login_title => 'JobTree';
+  String get loginTitle => 'JobTree';
 
   @override
-  String get login_subtitle => 'Sua plataforma para oportunidades!';
+  String get loginSubtitle => 'Sua plataforma para oportunidades!';
 
   @override
   String get email => 'Email';
@@ -24,44 +24,68 @@ class AppLocalizationsPt extends AppLocalizations {
   String get login => 'Entrar';
 
   @override
-  String get dont_have_account => 'Não tem uma conta? Cadastre-se';
+  String get invalidCredentials => 'Credenciais inválidas';
 
   @override
-  String get job_tree => 'JobTree';
+  String get dontHaveAccount => 'Não tem uma conta? Cadastre-se';
 
   @override
-  String get find_next_opportunity => 'Encontre sua próxima oportunidade!';
+  String get jobTree => 'JobTree';
 
   @override
-  String get search_positions => 'Pesquisar vagas...';
+  String get findNextOpportunity => 'Encontre sua próxima oportunidade!';
 
   @override
-  String get profile_title => 'Perfil do Usuário';
+  String get searchPositions => 'Pesquisar vagas...';
+
+  @override
+  String get profileTitle => 'Perfil do Usuário';
 
   @override
   String get fillAllTheFields => 'Por favor, preencha todos os campos.';
 
   @override
-  String get login_success_message => 'Login successful!';
+  String get loginSuccessMessage => 'Login successful!';
 
   @override
-  String get no_jobs_found => 'Nenhuma vaga encontrada.';
+  String get noJobsFound => 'Nenhuma vaga encontrada.';
 
   @override
-  String get register_create_account => 'Crie sua conta';
+  String get registerCreateAccount => 'Crie sua conta';
 
   @override
-  String get fill_fields_to_continue => 'Preencha os campos para continuar';
+  String get fillFieldsToContinue => 'Preencha os campos para continuar';
 
   @override
   String get name => 'Nome';
 
   @override
-  String get confirm_password => 'Confirme a senha';
+  String get confirmPassword => 'Confirme a senha';
 
   @override
   String get register => 'Registrar';
 
   @override
-  String get ja_tem_conta => 'Já tem uma conta? Faça login';
+  String get jaTemConta => 'Já tem uma conta? Faça login';
+
+  @override
+  String get errorSubmittingApplication => 'Erro ao sumbeter candidatura';
+
+  @override
+  String get successfulSubmission => 'Candidatura enviada com sucesso';
+
+  @override
+  String get applyNow => 'Candidate-se agora';
+
+  @override
+  String get fullName => 'Nome Completo';
+
+  @override
+  String get uploadCV => 'Envio de Currículo';
+
+  @override
+  String get coverLetter => 'Carta de Apresentação';
+
+  @override
+  String get submitCandidature => 'Enviar Candidatura';
 }

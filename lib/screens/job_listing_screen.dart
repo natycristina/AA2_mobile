@@ -16,7 +16,7 @@ class JobListingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          texts.job_tree, // "JobTree" traduzido
+          texts.jobTree, // "JobTree" traduzido
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -31,7 +31,7 @@ class JobListingScreen extends StatelessWidget {
               // TODO: Implementar navegação para o perfil do usuário
               // Navigator.pushNamed(context, '/userProfile');
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(texts.profile_title)),
+                SnackBar(content: Text(texts.profileTitle)),
               );
             },
           ),
@@ -55,7 +55,7 @@ class JobListingScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
                 child: Text(
-                  texts.find_next_opportunity, // "Encontre sua próxima oportunidade"
+                  texts.findNextOpportunity, // "Encontre sua próxima oportunidade"
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Colors.grey[600], // VoeTextGrey
                   ),
@@ -70,7 +70,7 @@ class JobListingScreen extends StatelessWidget {
                     viewModel.onSearchQueryChanged(query);
                   },
                   decoration: InputDecoration(
-                    hintText: texts.search_positions, // "Search positions"
+                    hintText: texts.searchPositions, // "Search positions"
                     hintStyle: const TextStyle(color: Colors.grey),
                     prefixIcon: const Icon(Icons.search, color: Colors.grey),
                     border: OutlineInputBorder(
@@ -89,7 +89,7 @@ class JobListingScreen extends StatelessWidget {
                 child: viewModel.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : viewModel.filteredJobs.isEmpty
-                    ? Center(child: Text(texts.no_jobs_found))
+                    ? Center(child: Text(texts.noJobsFound))
                     : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   itemCount: viewModel.filteredJobs.length,
@@ -99,14 +99,7 @@ class JobListingScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 12.0),
                       child: JobCard(
                         job: job,
-                        onTap: () {
-                          print('Job clicked: ${job.idJob}');
-                          // TODO: Implementar navegação para o detalhe da vaga
-                          // Exemplo: Navigator.pushNamed(context, '/jobDetail', arguments: job.idJob);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Detalhes da vaga: ${job.titulo}')),
-                          );
-                        },
+                        onTap: () { ClickOnJob(context, job); },
                       ),
                     );
                   },
@@ -169,4 +162,12 @@ class JobCard extends StatelessWidget {
       ),
     );
   }
+}
+
+void ClickOnJob(BuildContext context, Job selectedJob) {
+  Navigator.pushReplacementNamed(context, '/jobApplication', arguments: {'selectedJob': selectedJob});
+}
+
+void OnBack(BuildContext context) {
+  Navigator.pushReplacementNamed(context, '/home');
 }

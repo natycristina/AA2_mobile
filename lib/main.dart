@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_projects/models/job.dart';
 import 'package:flutter_projects/repositories/user_repository.dart';
+import 'package:flutter_projects/screens/apply_to_job_screen.dart';
 import 'package:flutter_projects/screens/register_screen.dart';
 import 'package:flutter_projects/viewmodels/register_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -60,7 +62,22 @@ class MyApp extends StatelessWidget {
           onNavigateToLogin: () => NavigateToLogin(context)
           ),
       },
+        onGenerateRoute: (settings) {
+        if (settings.name == '/jobApplication') {
+          final args = settings.arguments as Map<String, dynamic>;
+          final Job job = args['selectedJob'];
+
+          return MaterialPageRoute(
+            builder: (context) =>
+                ApplyToJobScreen(
+                  selectedJob: job,
+                  onBack: () => NavigateToJobListing(context),
+                ),
+          );
+        }
+      }
     );
+
   }
 }
 

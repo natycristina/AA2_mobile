@@ -24,26 +24,17 @@ class UserRepository {
 
         User? localUser = await _appDatabase.getUserByEmail(email);
 
-        if (localUser != null) {
-          localUser.nome = backendUser.nome;
-          localUser.senha = passwordToStoreLocally;
-          await _appDatabase.insertUser(localUser);
+        if (localUser == null) {
+          return null;
         } else {
-          final newUser = User(
-            nome: backendUser.nome,
-            email: backendUser.email,
-            senha: passwordToStoreLocally,
-          );
-          await _appDatabase.insertUser(newUser);
-          localUser = newUser;
-        }
+          if (localUser.senha == password) {
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString('logged_user_email', localUser.email);
 
-        if (localUser != null && localUser.email != null) {
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString('logged_user_email', localUser.email
-          );
+            return localUser;
+          }
+          return null;
         }
-        return localUser;
       }
     } catch (e) {
       print('Erro de conexão com o backend. Tentando login local: $e');
@@ -91,11 +82,11 @@ class UserRepository {
   }
 
   // Adicione um método para aplicar a uma vaga
-  Future<bool> applyToJob(int userId, int jobId) async {
+  Future<bool> applyToJob(String userEmail, int jobId) async {
     try {
       // A linha "final jobUser = JobUser(...);" FOI REMOVIDA
       // pois o seu AppDatabase.applyToJob espera userId e jobId diretamente.
-      final id = await _appDatabase.applyToJob(userId, jobId); // <--- CORRIGIDO AQUI!
+      final id = await _appDatabase.applyToJob(userEmail, jobId); // <--- CORRIGIDO AQUI!
       return id > 0;
     } catch (e) {
       print('Erro ao aplicar à vaga: $e');

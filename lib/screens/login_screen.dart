@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SizedBox(height: 100),
                 Text(
-                  texts.login_title,
+                  texts.loginTitle,
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 48,
@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  texts.login_subtitle,
+                  texts.loginSubtitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
                 ),
@@ -140,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     final ok = await viewModel.login();
                     if (ok && context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(texts.login_success_message)),
+                        SnackBar(content: Text(texts.loginSuccessMessage)),
                       );
                       Navigator.pushReplacementNamed(context, '/home');
                     }
@@ -160,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: widget.onNavigateToRegister ?? () { /* Implementar navegação para registro */ },
-                  child: Text(texts.dont_have_account),
+                  child: Text(texts.dontHaveAccount),
                 ),
               ],
             ),

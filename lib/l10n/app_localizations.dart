@@ -98,17 +98,17 @@ abstract class AppLocalizations {
     Locale('pt')
   ];
 
-  /// No description provided for @login_title.
+  /// No description provided for @loginTitle.
   ///
   /// In en, this message translates to:
   /// **'Welcome'**
-  String get login_title;
+  String get loginTitle;
 
-  /// No description provided for @login_subtitle.
+  /// No description provided for @loginSubtitle.
   ///
   /// In en, this message translates to:
   /// **'Sign in to continue'**
-  String get login_subtitle;
+  String get loginSubtitle;
 
   /// No description provided for @email.
   ///
@@ -128,35 +128,41 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
-  /// No description provided for @dont_have_account.
+  /// No description provided for @invalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Credentials'**
+  String get invalidCredentials;
+
+  /// No description provided for @dontHaveAccount.
   ///
   /// In en, this message translates to:
   /// **'Don\'t have an account? Register here'**
-  String get dont_have_account;
+  String get dontHaveAccount;
 
-  /// No description provided for @job_tree.
+  /// No description provided for @jobTree.
   ///
   /// In en, this message translates to:
   /// **'JobTree'**
-  String get job_tree;
+  String get jobTree;
 
-  /// No description provided for @find_next_opportunity.
+  /// No description provided for @findNextOpportunity.
   ///
   /// In en, this message translates to:
   /// **'Find your next opportunity'**
-  String get find_next_opportunity;
+  String get findNextOpportunity;
 
-  /// No description provided for @search_positions.
+  /// No description provided for @searchPositions.
   ///
   /// In en, this message translates to:
   /// **'Search positions...'**
-  String get search_positions;
+  String get searchPositions;
 
-  /// No description provided for @profile_title.
+  /// No description provided for @profileTitle.
   ///
   /// In en, this message translates to:
   /// **'User Profile'**
-  String get profile_title;
+  String get profileTitle;
 
   /// No description provided for @fillAllTheFields.
   ///
@@ -164,29 +170,29 @@ abstract class AppLocalizations {
   /// **'Please fill in all fields.'**
   String get fillAllTheFields;
 
-  /// No description provided for @login_success_message.
+  /// No description provided for @loginSuccessMessage.
   ///
   /// In en, this message translates to:
   /// **'Login successful!'**
-  String get login_success_message;
+  String get loginSuccessMessage;
 
-  /// No description provided for @no_jobs_found.
+  /// No description provided for @noJobsFound.
   ///
   /// In en, this message translates to:
   /// **'No jobs found.'**
-  String get no_jobs_found;
+  String get noJobsFound;
 
-  /// No description provided for @register_create_account.
+  /// No description provided for @registerCreateAccount.
   ///
   /// In en, this message translates to:
   /// **'Create your account'**
-  String get register_create_account;
+  String get registerCreateAccount;
 
-  /// No description provided for @fill_fields_to_continue.
+  /// No description provided for @fillFieldsToContinue.
   ///
   /// In en, this message translates to:
   /// **'Fill in all the fields to continue'**
-  String get fill_fields_to_continue;
+  String get fillFieldsToContinue;
 
   /// No description provided for @name.
   ///
@@ -194,11 +200,11 @@ abstract class AppLocalizations {
   /// **'Name'**
   String get name;
 
-  /// No description provided for @confirm_password.
+  /// No description provided for @confirmPassword.
   ///
   /// In en, this message translates to:
   /// **'Confirm password'**
-  String get confirm_password;
+  String get confirmPassword;
 
   /// No description provided for @register.
   ///
@@ -206,11 +212,53 @@ abstract class AppLocalizations {
   /// **'Register'**
   String get register;
 
-  /// No description provided for @ja_tem_conta.
+  /// No description provided for @jaTemConta.
   ///
   /// In en, this message translates to:
   /// **'Already have an account? Log in'**
-  String get ja_tem_conta;
+  String get jaTemConta;
+
+  /// No description provided for @errorSubmittingApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Error submitting application'**
+  String get errorSubmittingApplication;
+
+  /// No description provided for @successfulSubmission.
+  ///
+  /// In en, this message translates to:
+  /// **'Application successfully submitted'**
+  String get successfulSubmission;
+
+  /// No description provided for @applyNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply Now'**
+  String get applyNow;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @uploadCV.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload CV'**
+  String get uploadCV;
+
+  /// No description provided for @coverLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover Letter'**
+  String get coverLetter;
+
+  /// No description provided for @submitCandidature.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Candidature'**
+  String get submitCandidature;
 }
 
 class _AppLocalizationsDelegate
