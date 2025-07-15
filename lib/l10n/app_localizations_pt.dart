@@ -45,7 +45,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get fillAllTheFields => 'Por favor, preencha todos os campos.';
 
   @override
-  String get loginSuccessMessage => 'Login successful!';
+  String get loginSuccessMessage => 'Login efetuado com sucesso!';
 
   @override
   String get noJobsFound => 'Nenhuma vaga encontrada.';
@@ -88,4 +88,26 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get submitCandidature => 'Enviar Candidatura';
+
+  @override
+  String get logout_button_text => 'Sair';
+
+  @override
+  String get profile_title => 'Meu Perfil';
+
+  @override
+  String get back_button_desc => 'Voltar';
+
+  @override
+  String get profile_picture_desc => 'Foto de perfil';
+
+  @override
+  String get applied_jobs_title => 'Vagas Candidatadas';
+
+  @override
+  String get no_applied_jobs => 'Você ainda não se candidatou a nenhuma vaga.';
+
+  @override
+  String get profile_load_error =>
+      'Não foi possível carregar o perfil do usuário.';
 }

@@ -88,4 +88,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submitCandidature => 'Submit Candidature';
+
+  @override
+  String get logout_button_text => 'Sair';
+
+  @override
+  String get profile_title => 'Meu Perfil';
+
+  @override
+  String get back_button_desc => 'Voltar';
+
+  @override
+  String get profile_picture_desc => 'Foto de perfil';
+
+  @override
+  String get applied_jobs_title => 'Vagas Candidatadas';
+
+  @override
+  String get no_applied_jobs => 'Você ainda não se candidatou a nenhuma vaga.';
+
+  @override
+  String get profile_load_error =>
+      'Não foi possível carregar o perfil do usuário.';
 }

@@ -28,11 +28,13 @@ class JobListingScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.person, color: Colors.black87),
             onPressed: () {
-              // TODO: Implementar navegação para o perfil do usuário
-              // Navigator.pushNamed(context, '/userProfile');
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(texts.profileTitle)),
-              );
+              // *** ATUALIZAÇÃO AQUI ***
+              // Navega para a rota '/profile' que foi definida em main.dart
+              Navigator.pushNamed(context, '/profile');
+              // A SnackBar abaixo pode ser removida, pois a navegação real irá acontecer
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   SnackBar(content: Text(texts.profileTitle)),
+              // );
             },
           ),
         ],
@@ -153,8 +155,8 @@ class JobCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                job.salario,
-                style: Theme.of(context).textTheme.bodyMedium
+                  job.salario,
+                  style: Theme.of(context).textTheme.bodyMedium
               )
             ],
           ),

@@ -27,5 +27,13 @@
   "fullName": "Nome Completo",
   "uploadCV": "Envio de Currículo",
   "coverLetter": "Carta de Apresentação",
-  "submitCandidature": "Enviar Candidatura"
+  "submitCandidature": "Enviar Candidatura",
+
+  "logout_button_text": "Sair",
+  "profile_title": "Meu Perfil",
+  "back_button_desc": "Voltar",
+  "profile_picture_desc": "Foto de perfil",
+  "applied_jobs_title": "Vagas Candidatadas",
+  "no_applied_jobs": "Você ainda não se candidatou a nenhuma vaga.",
+  "profile_load_error": "Não foi possível carregar o perfil do usuário."
 }

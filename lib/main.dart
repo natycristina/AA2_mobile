@@ -1,3 +1,4 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_projects/models/job.dart';
@@ -6,28 +7,36 @@ import 'package:flutter_projects/screens/apply_to_job_screen.dart';
 import 'package:flutter_projects/screens/register_screen.dart';
 import 'package:flutter_projects/viewmodels/register_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'l10n/app_localizations.dart'; // Certifique-se de que está correto
+// import 'package:sqflite/sqflite.dart'; // Mantenha este import se ainda usar sqflite diretamente, mas geralmente não é necessário aqui
+// import 'package:sqflite_common_ffi/sqflite_ffi.dart'; //
+import 'l10n/app_localizations.dart';
 import 'viewmodels/login_viewmodel.dart';
-import 'viewmodels/job_listing_viewmodel.dart'; // O SEU JOB LISTING VIEWMODEL
+import 'viewmodels/job_listing_viewmodel.dart';
+import 'viewmodels/user_profile_viewmodel.dart';
 import 'screens/login_screen.dart';
-import 'screens/job_listing_screen.dart'; // SUA TELA JOB LISTING SCREEN
-import 'database/app_database.dart'; // Importe seu banco de dados
+import 'screens/job_listing_screen.dart';
+import 'screens/user_profile_screen.dart';
+import 'database/app_database.dart';
 
 void main() async {
-  sqfliteFfiInit();
-  databaseFactory = databaseFactoryFfi;
+  WidgetsFlutterBinding.ensureInitialized();
+  // sqfliteFfiInit(); //
+  // databaseFactory = databaseFactoryFfi; //
 
   final userRepository = UserRepository();
-  WidgetsFlutterBinding.ensureInitialized(); // Garante que o Flutter esteja inicializado
-  await AppDatabase().database; // <<< Inicializa o banco de dados antes de rodar o app
+
+  await AppDatabase().database; // Isso agora usará o sqflite padrão
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => JobListingViewModel()),
-        ChangeNotifierProvider(create: (_) => RegisterViewModel(userRepository: userRepository))
+        ChangeNotifierProvider(create: (_) => RegisterViewModel(userRepository: userRepository)),
+        ChangeNotifierProvider(
+          create: (context) => UserProfileViewModel(userRepository),
+        ),
+        Provider<UserRepository>.value(value: userRepository),
       ],
       child: const MyApp(),
     ),
@@ -48,7 +57,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: AppLocalizations.supportedLocales, // Já está correto
+      supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreen(
@@ -56,13 +65,15 @@ class MyApp extends StatelessWidget {
           onNavigateToRegister: () => NavigateToRegister(context),
         ),
         '/home': (context) => const JobListingScreen(),
-        // Adicione aqui a rota para a tela de registro, se tiver
         '/register': (context) => RegisterScreen(
           onRegistrationSuccess: () => NavigateToJobListing(context),
-          onNavigateToLogin: () => NavigateToLogin(context)
-          ),
+          onNavigateToLogin: () => NavigateToLogin(context),
+        ),
+        '/profile': (context) => UserProfileScreen(onBack: () {
+          Navigator.of(context).pop();
+        }),
       },
-        onGenerateRoute: (settings) {
+      onGenerateRoute: (settings) {
         if (settings.name == '/jobApplication') {
           final args = settings.arguments as Map<String, dynamic>;
           final Job job = args['selectedJob'];
@@ -75,9 +86,9 @@ class MyApp extends StatelessWidget {
                 ),
           );
         }
-      }
+        return null;
+      },
     );
-
   }
 }
 

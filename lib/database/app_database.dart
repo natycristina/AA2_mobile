@@ -1,8 +1,8 @@
+// lib/database/app_database.dart
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../models/user.dart';
-import '../models/job.dart'; // Importe o modelo Job aqui
-// import 'package:bcrypt/bcrypt.dart'; // Se for usar bcrypt em Flutter
+import '../models/job.dart';
 
 class AppDatabase {
   static final AppDatabase _instance = AppDatabase._internal();
@@ -26,7 +26,7 @@ class AppDatabase {
 
     return await openDatabase(
       path,
-      version: 4, // Incrementar a versão quando houver mudanças no schema
+      version: 5, // Aumente a versão para forçar _onUpgrade/recriação
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -51,7 +51,7 @@ class AppDatabase {
         salario TEXT
       )
     ''');
-    // Tabela de relação Usuário-Vaga (JobUser) se necessário
+    // Tabela de relação Usuário-Vaga (JobUser)
     await db.execute('''
       CREATE TABLE user_jobs (
         user_email TEXT,
@@ -62,11 +62,8 @@ class AppDatabase {
       )
     ''');
 
-    // Inserir usuário de teste e vagas iniciais (semelhante ao seu AppDatabaseCallback)
-    // CUIDADO: Se você estiver usando o backend para login, este usuário local pode ser apenas
-    // para testes offline ou para a fase inicial de desenvolvimento.
-    // final hashedPassword = BCrypt.hashpw('password', BCrypt.gensalt()); // Se estiver usando bcrypt
-    final String testPasswordHash = 'password'; // Use um hash real se bcrypt estiver habilitado
+    // Inserir usuário de teste e vagas iniciais
+    final String testPasswordHash = 'password';
     await db.insert('users', {
       'nome': 'Usuário Teste',
       'email': 'test@example.com',
@@ -91,16 +88,21 @@ class AppDatabase {
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    // Lógica para migração de banco de dados se a versão mudar
-    // Por exemplo, se newVersion > oldVersion, adicione colunas ou tabelas
-    if (oldVersion < 4) {
-      // Exemplo: Adicionar uma nova coluna na versão 2
-      // await db.execute('ALTER TABLE users ADD COLUMN nome TEXT PRIMARY KEY');
-      // await db.execute('ALTER TABLE users DROP COLUMN');
+    // IMPORTANTE: Se a versão atual (que você está alterando) for 4, e você subiu para 5.
+    // Isso vai dropar e recriar TUDO se a versão antiga for menor que 5.
+    if (oldVersion < 5) {
+      print('Database upgrade from version $oldVersion to $newVersion. Dropping and recreating tables...');
+      await db.execute('DROP TABLE IF EXISTS user_jobs');
+      await db.execute('DROP TABLE IF EXISTS users');
+      await db.execute('DROP TABLE IF EXISTS jobs');
+      await _onCreate(db, newVersion);
+      print('Database upgraded and recreated for version 5.');
     }
+    // Você pode adicionar outras lógicas de migração aqui para versões futuras
+    // Ex: if (oldVersion < 6) { ... }
   }
 
-  // Métodos CRUD para usuários (equivalente ao UserDao)
+  // Métodos CRUD para usuários
   Future<User?> getUserByEmail(String email) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
@@ -119,7 +121,7 @@ class AppDatabase {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'users',
-      where: 'email = ? AND password = ?', // A senha aqui seria o hash armazenado
+      where: 'email = ? AND senha = ?', // CORRIGIDO: nome da coluna é 'senha'
       whereArgs: [email, passwordHash],
       limit: 1,
     );
@@ -131,10 +133,11 @@ class AppDatabase {
 
   Future<int> insertUser(User user) async {
     final db = await database;
+    // user.toMap() já inclui o email para a PK
     return await db.insert('users', user.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  // Métodos CRUD para vagas (equivalente ao JobDao)
+  // Métodos CRUD para vagas
   Future<List<Job>> getJobs() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('jobs');
@@ -148,20 +151,11 @@ class AppDatabase {
     return await db.insert('jobs', job.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  // Métodos para JobUser (se necessário)
-  Future<int> applyToJob(String userEmail, int jobId) async {
-    final db = await database;
-    return await db.insert('user_jobs', {'userEmail': userEmail, 'jobId': jobId});
-  }
-
-  // --- NOVOS MÉTODOS ADICIONADOS PARA RESOLVER ERROS ---
-
-  // Método para obter uma vaga por ID (para JobRepository)
   Future<Job?> getJobById(int id) async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
       'jobs',
-      where: 'idJob = ?', // Supondo que a coluna do ID da vaga é 'idJob'
+      where: 'idJob = ?',
       whereArgs: [id],
       limit: 1,
     );
@@ -171,28 +165,34 @@ class AppDatabase {
     return null;
   }
 
-  // Método para obter vagas aplicadas por um usuário (para UserRepository)
-  Future<List<Job>> getAppliedJobsForUser(int userId) async {
+  // Métodos para user_jobs
+  Future<int> applyToJob(String userEmail, int jobId) async { // Parâmetro agora é String userEmail
     final db = await database;
-    // Esta query recupera os detalhes das vagas que um usuário aplicou
+    return await db.insert('user_jobs', {'user_email': userEmail, 'jobId': jobId}, conflictAlgorithm: ConflictAlgorithm.ignore); // CORRIGIDO: nome da coluna é 'user_email'
+  }
+
+  Future<List<Job>> getAppliedJobsForUser(String userEmail) async { // Parâmetro agora é String userEmail
+    final db = await database;
     final List<Map<String, dynamic>> maps = await db.rawQuery('''
-      SELECT j.idJob, j.title, j.description, j.company, j.salary
+      SELECT j.idJob, j.titulo, j.descricao, j.empresa, j.salario
       FROM jobs j
       INNER JOIN user_jobs uj ON j.idJob = uj.jobId
-      WHERE uj.userId = ?
-    ''', [userId]);
+      WHERE uj.user_email = ?
+    ''', [userEmail]); // CORRIGIDO: usar user_email no WHERE clause
 
     return List.generate(maps.length, (i) {
       return Job.fromMap(maps[i]);
     });
   }
 
+  // O método insertUserJob na sua nova tela ApplyToJobScreen chama este método.
+  // Você não precisa dele se já tem applyToJob, mas se quiser mantê-lo, está aqui:
   Future<void> insertUserJob(String email, int jobId) async {
     final db = await database;
     await db.insert(
       'user_jobs',
       {
-        'user_email': email,
+        'user_email': email, // CORRIGIDO: nome da coluna é 'user_email'
         'jobId': jobId,
       },
       conflictAlgorithm: ConflictAlgorithm.ignore,

@@ -1,5 +1,6 @@
+// lib/viewmodels/register_viewmodel.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_projects/l10n/app_localizations_pt.dart';
+// import 'package:flutter_projects/l10n/app_localizations_pt.dart'; // Removido, use AppLocalizations geral
 import 'package:flutter_projects/repositories/user_repository.dart';
 
 class RegisterViewModel extends ChangeNotifier {
@@ -56,14 +57,14 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
 
     if (_nome.isEmpty || _email.isEmpty || _password.isEmpty || _confirmPassword.isEmpty) {
-      _errorMessage = "Preencha todos os campos";
+      _errorMessage = "Preencha todos os campos"; // Você pode usar appLocalizations aqui
       _isLoading = false;
       notifyListeners();
       return;
     }
 
     if (_password != _confirmPassword) {
-      _errorMessage = "As senhas não coincidem.";
+      _errorMessage = "As senhas não coincidem."; // Você pode usar appLocalizations aqui
       _isLoading = false;
       notifyListeners();
       return;
@@ -72,22 +73,23 @@ class RegisterViewModel extends ChangeNotifier {
     try {
       debugPrint("RegisterViewModel: tentando registrar $_nome / $_email");
 
-      final result = await userRepository.register(
+      // CORREÇÃO AQUI: Chamar registerUser em vez de register
+      final result = await userRepository.registerUser(
         _nome,
         _email,
         _password,
       );
 
       _isLoading = false;
-      if (result != null) {
+      if (result) { // 'result' agora é um booleano (true/false)
         _registrationSuccess = true;
         debugPrint("RegisterViewModel: registro com sucesso");
       } else {
-        _errorMessage = "Erro ao registrar. Tente novamente.";
+        _errorMessage = "Erro ao registrar. Tente novamente."; // Você pode usar appLocalizations aqui
         debugPrint("RegisterViewModel: erro no registro");
       }
     } catch (e) {
-      _errorMessage = "Erro inesperado: ${e.toString()}";
+      _errorMessage = "Erro inesperado: ${e.toString()}"; // Você pode usar appLocalizations aqui
       _isLoading = false;
       debugPrint("RegisterViewModel: exceção: $e");
     }

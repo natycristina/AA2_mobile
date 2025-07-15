@@ -259,6 +259,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submit Candidature'**
   String get submitCandidature;
+
+  /// No description provided for @logout_button_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Sair'**
+  String get logout_button_text;
+
+  /// No description provided for @profile_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Meu Perfil'**
+  String get profile_title;
+
+  /// No description provided for @back_button_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Voltar'**
+  String get back_button_desc;
+
+  /// No description provided for @profile_picture_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Foto de perfil'**
+  String get profile_picture_desc;
+
+  /// No description provided for @applied_jobs_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Vagas Candidatadas'**
+  String get applied_jobs_title;
+
+  /// No description provided for @no_applied_jobs.
+  ///
+  /// In en, this message translates to:
+  /// **'Você ainda não se candidatou a nenhuma vaga.'**
+  String get no_applied_jobs;
+
+  /// No description provided for @profile_load_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Não foi possível carregar o perfil do usuário.'**
+  String get profile_load_error;
 }
 
 class _AppLocalizationsDelegate
