@@ -20,11 +20,13 @@ dependencies:
   path_provider: ^2.1.1
   http: ^1.2.1
   shared_preferences: ^2.2.3
-  # sqflite_common_ffi: ^2.3.0
+  sqflite_common_ffi: ^2.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.0
+  build_runner: ^2.4.8
   flutter_lints: ^2.0.0 # Versão estável. Pode ser ajustada se quiser usar a mais recente, mas esta deve funcionar.
   flutter_launcher_icons: ^0.13.1 # Versão estável. Pode ser ajustada se quiser usar a mais recente.
   # Para geração de código de internacionalização e assets (R5)
@@ -41,6 +43,24 @@ l10n:
   output-localization-file: app_localizations.dart
   output-class: AppLocalizations
 
+sqlite3:
+  dependency: transitive
+  description:
+    name: sqlite3
+    sha256: c0503c69b44d5714e6abbf4c1f51a3c3cc42b75ce785f44404765e4635481d38
+    url: "https://pub.dev"
+  source: hosted
+  version: "2.7.6"
+
+
+sqflite_common_ffi:
+  dependency: "direct main"
+  description:
+    name: sqflite_common_ffi
+    sha256: "9faa2fedc5385ef238ce772589f7718c24cdddd27419b609bb9c6f703ea27988"
+    url: "https://pub.dev"
+  source: hosted
+  version: "2.3.6"
   # Caso você tenha assets (imagens, etc.) em seu projeto, descomente e ajuste:
   # assets:
   #   - assets/images/

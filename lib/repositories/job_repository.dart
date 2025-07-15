@@ -3,7 +3,11 @@ import '../models/job.dart';
 import '../database/app_database.dart'; // Importe o banco de dados
 
 class JobRepository {
-  final AppDatabase _appDatabase = AppDatabase(); // Instância do banco de dados
+  final AppDatabase _appDatabase; // Instância do banco de dados
+
+  JobRepository({
+    AppDatabase? database
+  }) : _appDatabase = database ?? AppDatabase();
 
   // O método getJobs agora busca do banco de dados SQLite
   Future<List<Job>> getJobs() async {

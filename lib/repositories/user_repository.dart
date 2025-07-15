@@ -7,8 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/job.dart';
 
 class UserRepository {
-  final AppDatabase _appDatabase = AppDatabase();
-  final UserApiService _userApiService = UserApiService();
+  final AppDatabase _appDatabase;
+  final UserApiService _userApiService;
+
+  UserRepository({
+    AppDatabase? database,
+    UserApiService? apiService,
+  }) : _appDatabase = database ?? AppDatabase(),
+       _userApiService = apiService ?? UserApiService();
 
   Future<User?> loginUser(String email, String password) async { // Renomeado para loginUser para evitar conflito com 'login'
     // Tenta primeiro o login via backend (R3)

@@ -41,7 +41,6 @@ class JobListingScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Gradiente de fundo - similar ao Box de Kotlin/Compose
           Container(
             height: MediaQuery.of(context).size.height * 0.25, // Ajuste para 25% da altura
             decoration: const BoxDecoration(
