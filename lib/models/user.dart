@@ -27,7 +27,6 @@ class User {
 
   // <--- NOVO: Para converter JSON (do backend) em objeto User
   factory User.fromJson(Map<String, dynamic> json) {
-    print("BRUH3");
     print("${json['nome']}, ${json['email']}, ${json['senha']}");
     return User(
       nome: json['name'] ?? json['nome'] ?? '', // Tente 'name' ou 'nome'

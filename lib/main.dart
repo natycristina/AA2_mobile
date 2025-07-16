@@ -7,8 +7,8 @@ import 'package:flutter_projects/screens/apply_to_job_screen.dart';
 import 'package:flutter_projects/screens/register_screen.dart';
 import 'package:flutter_projects/viewmodels/register_viewmodel.dart';
 import 'package:provider/provider.dart';
-// import 'package:sqflite/sqflite.dart'; // Mantenha este import se ainda usar sqflite diretamente, mas geralmente não é necessário aqui
-// import 'package:sqflite_common_ffi/sqflite_ffi.dart'; //
+import 'package:sqflite/sqflite.dart'; // Mantenha este import se ainda usar sqflite diretamente, mas geralmente não é necessário aqui
+import 'package:sqflite_common_ffi/sqflite_ffi.dart'; //
 import 'l10n/app_localizations.dart';
 import 'viewmodels/login_viewmodel.dart';
 import 'viewmodels/job_listing_viewmodel.dart';
@@ -20,8 +20,8 @@ import 'database/app_database.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // sqfliteFfiInit(); //
-  // databaseFactory = databaseFactoryFfi; //
+  sqfliteFfiInit(); //
+  databaseFactory = databaseFactoryFfi; //
 
   final userRepository = UserRepository();
 

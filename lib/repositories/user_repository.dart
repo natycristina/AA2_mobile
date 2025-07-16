@@ -7,24 +7,35 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/job.dart';
 
 class UserRepository {
-  final AppDatabase _appDatabase = AppDatabase();
-  final UserApiService _userApiService = UserApiService();
+  final AppDatabase _appDatabase;
+  final UserApiService _userApiService;
+
+  UserRepository({
+    AppDatabase? database,
+    UserApiService? apiService,
+  }) : _appDatabase = database ?? AppDatabase(),
+       _userApiService = apiService ?? UserApiService();
 
   Future<User?> loginUser(String email, String password) async { // Renomeado para loginUser para evitar conflito com 'login'
     // Tenta primeiro o login via backend (R3)
     try {
+      // O backend apenas retorna o que foi mandado
+      // Então, é necessário pegar o usuário do banco de dados e comparar com
+      // as credenciais enviadas
       final User? backendUser = await _userApiService.loginUser(email, password);
-      if (backendUser != null) {
+      final User? dbUser = await _appDatabase.getUserByEmail(email);
+
+      if (backendUser != null && dbUser != null) {
         // Se o backend validou, garantimos que o usuário existe localmente (R4)
         // O usuário do backend já deve ter nome, email e senha.
-        // Inserir/Atualizar localmente garante que os dados estejam no DB local
-        await _appDatabase.insertUser(backendUser); // Usa o método insertUser que lida com replace
+        if (backendUser.senha == dbUser.senha) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString('logged_user_email', backendUser.email); // Salva o EMAIL
 
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('logged_user_email', backendUser.email); // Salva o EMAIL
-
-        print('Login via backend bem-sucedido. Email salvo em SharedPreferences: ${backendUser.email}');
-        return backendUser;
+          print('Login via backend bem-sucedido. Email salvo em SharedPreferences: ${backendUser.email}');
+          return backendUser;
+        }
+        return null;
       }
     } catch (e) {
       print('Erro de conexão com o backend ou falha no backend login. Tentando login local: $e');

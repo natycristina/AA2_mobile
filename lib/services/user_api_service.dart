@@ -17,11 +17,8 @@ class UserApiService {
       );
 
       if (response.statusCode == 200) {
-        print("BRUH");
         // Supondo que o backend retorna os dados do usuário registrado
         final Map<String, dynamic> responseBody = jsonDecode(response.body);
-        print(responseBody);
-        print("BRUH2");
         // Ajuste a criação do User.fromJson conforme o que seu backend retorna.
         // Se seu backend retorna um objeto User com ID, email, senha, etc.
         return User.fromJson(responseBody);

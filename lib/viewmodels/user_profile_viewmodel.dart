@@ -19,6 +19,7 @@ class UserProfileViewModel extends ChangeNotifier {
   bool get isApplying => _isApplying;
 
   Future<void> loadUserProfile() async {
+    print("HADAIWDIWADGBRUHHHH");
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
