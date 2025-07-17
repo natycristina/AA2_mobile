@@ -84,6 +84,11 @@ class RegisterViewModel extends ChangeNotifier {
       if (result) { // 'result' agora é um booleano (true/false)
         _registrationSuccess = true;
         debugPrint("RegisterViewModel: registro com sucesso");
+        final perform_login = await userRepository.loginUser(_email, _password);
+        if(perform_login == null) {
+          _registrationSuccess = false;
+          _errorMessage = "Login após registro mal sucedido";
+        }
       } else {
         _errorMessage = "Erro ao registrar. Tente novamente."; // Você pode usar appLocalizations aqui
         debugPrint("RegisterViewModel: erro no registro");

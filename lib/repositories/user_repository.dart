@@ -56,7 +56,7 @@ class UserRepository {
   Future<bool> registerUser(String nome, String email, String password) async { // Renomeado para registerUser
     try {
       final User? backendUser = await _userApiService.registerUser(nome, email, password);
-
+      print(backendUser?.email ?? "brull");
       if (backendUser != null) {
         // Se o backend registrou com sucesso, insere ou atualiza no DB local
         await _appDatabase.insertUser(backendUser);
